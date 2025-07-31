@@ -54,6 +54,19 @@
             </div>
           </div>
         </div>
+
+        <!-- Saran Kegiatan -->
+        <div class="activity-suggestion">
+          <transition name="fade-slide">
+            <div class="activity-card">
+              <div class="activity-icon">🎯</div>
+              <div class="activity-text">
+                <h4>Saran Kegiatan</h4>
+                <p>{{ getActivitySuggestion(weatherData.current.condition.text) }}</p>
+              </div>
+            </div>
+          </transition>
+        </div>
       </div>
 
       <div v-else-if="showWelcome" class="welcome-message">
@@ -99,7 +112,6 @@ export default {
             { icon: '☁️', label: 'Tingkat Awan', value: `${this.weatherData.current.cloud}%` },
             { icon: '💨', label: 'Hembusan Angin', value: `${this.weatherData.current.gust_kph} km/h` }
         ]
-
     }
   },
   methods: {
@@ -133,11 +145,24 @@ export default {
         'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
       ]
       return `${day} ${bulan[+month - 1]} ${year}, ${time} WIB`
+    },
+    getActivitySuggestion(condition) {
+      const lower = condition.toLowerCase()
+      if (lower.includes('sunny') || lower.includes('clear')) {
+        return 'Cuaca cerah! Cocok untuk jalan-jalan atau olahraga di luar.'
+      } else if (lower.includes('rain') || lower.includes('shower')) {
+        return 'Hujan turun. Mungkin saat yang tepat untuk membaca buku atau menonton film di rumah.'
+      } else if (lower.includes('cloud')) {
+        return 'Berawan. Cocok untuk berjalan santai atau ngopi di kafe favorit.'
+      } else if (lower.includes('snow')) {
+        return 'Salju turun! Jangan lupa pakai jaket tebal jika keluar rumah.'
+      } else {
+        return 'Nikmati harimu dengan kegiatan yang kamu sukai!'
+      }
     }
   }
 }
 </script>
-
 
 <style scoped>
 .weather-container {
@@ -258,6 +283,42 @@ export default {
   font-weight: bold;
 }
 
+.activity-suggestion {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.activity-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e3f2fd;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  margin: 0 auto;
+  animation: pop-in 0.5s ease forwards;
+  gap: 1rem;
+}
+
+.activity-icon {
+  font-size: 2.5rem;
+  animation: bounce 1.5s infinite;
+}
+
+.activity-text h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.activity-text p {
+  margin: 0.3rem 0 0;
+  font-size: 0.95rem;
+  color: #34495e;
+}
+
 .welcome-message, .error-message {
   text-align: center;
   padding: 2rem;
@@ -297,6 +358,17 @@ export default {
   opacity: 0;
 }
 
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.4s ease;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 .loading-spinner {
   animation: spin 1s linear infinite;
   display: inline-block;
@@ -305,6 +377,16 @@ export default {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @media (max-width: 768px) {
@@ -340,6 +422,23 @@ export default {
 
   .detail-item {
     justify-content: flex-start;
+  }
+
+  .activity-card {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .activity-icon {
+    font-size: 2rem;
+  }
+
+  .activity-text h4 {
+    font-size: 1rem;
+  }
+
+  .activity-text p {
+    font-size: 0.9rem;
   }
 }
 </style>
