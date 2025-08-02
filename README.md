@@ -25,8 +25,8 @@
 ---
 ## 📸 Cuplikan Tampilan (Screenshots)
 <p align="center">
-  <img src="vue-weather/src/assets/image1.png" width="300"/>
-  <img src="vue-weather/src/assets/image.png" width="290"/>
+  <img src="src/assets/image1.png" width="300"/>
+  <img src="src/assets/image.png" width="290"/>
 </p>
 
 
