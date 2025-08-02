@@ -5,8 +5,8 @@ const cors = require('cors')
 
 const app = express()
 const PORT = 3001
-const API_KEY = process.env.WEATHER_API_KEY
-const WEATHER_API_URL = process.env.WEATHER_API_URL
+const API_KEY = process.env.VITE_WEATHER_API_KEY
+const WEATHER_API_URL = process.env.VITE_WEATHER_API_URL
 
 app.use(cors())
 
