@@ -127,7 +127,7 @@ export default {
       this.showWelcome = false
 
       try {
-        const response = await axios.get('http://localhost:3001/weather', {
+        const response = await axios.get('/api/weather', {
           params: { city: this.city }
         })
         this.weatherData = response.data
