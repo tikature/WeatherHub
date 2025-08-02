@@ -9,11 +9,7 @@ const count = ref(0)
 </script>
 
 <template>
-  <h1>
-try 
-        const response = await axios.get('http://localhost:3001/weather', {
-          params: { city: this.city }
-        }) </h1>
+  <h1>Weather </h1>
           <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
